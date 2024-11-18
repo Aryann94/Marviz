@@ -8,6 +8,8 @@
     <style>
         body{
             background-color: black;
+            display: flex;
+            justify-content: center;
     
         }
         .infobulle {
@@ -41,45 +43,20 @@
     <div class="infobulle" id="infobulle"></div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-                const filmsData = [
-                    { "filmLabel": "Captain America: First Avenger", "releaseYear": 2011, "anneemarvel": 1945 },
-                    { "filmLabel": "Captain Marvel", "releaseYear": 2019, "anneemarvel": 1995 },
-                    { "filmLabel": "Iron Man", "releaseYear": 2008, "anneemarvel": 2010 },
-                    { "filmLabel": "Iron Man 2", "releaseYear": 2010, "anneemarvel": 2011 },
-                    { "filmLabel": "L'Incroyable Hulk", "releaseYear": 2008, "anneemarvel": 2011 },
-                    { "filmLabel": "Thor", "releaseYear": 2011, "anneemarvel": 2011 },
-                    { "filmLabel": "Avengers", "releaseYear": 2012, "anneemarvel": 2012 },
-                    { "filmLabel": "Iron Man 3", "releaseYear": 2013, "anneemarvel": 2012 },
-                    { "filmLabel": "Thor : Le Monde des ténèbres", "releaseYear": 2013, "anneemarvel": 2013 },
-                    { "filmLabel": "Captain America : Le Soldat de l'hiver", "releaseYear": 2014, "anneemarvel": 2014 },
-                    { "filmLabel": "Les Gardiens de la Galaxie", "releaseYear": 2014, "anneemarvel": 2014 },
-                    { "filmLabel": "Les Gardiens de la Galaxie Vol. 2", "releaseYear": 2017, "anneemarvel": 2014 },
-                    { "filmLabel": "Avengers : L'Ère d'Ultron", "releaseYear": 2015, "anneemarvel": 2015 },
-                    { "filmLabel": "Ant-Man", "releaseYear": 2015, "anneemarvel": 2015 },
-                    { "filmLabel": "Captain America : Civil War", "releaseYear": 2016, "anneemarvel": 2016 },
-                    { "filmLabel": "Black Widow", "releaseYear": 2021, "anneemarvel": 2016 },
-                    { "filmLabel": "Doctor Strange", "releaseYear": 2016, "anneemarvel": 2016 },
-                    { "filmLabel": "Black Panther", "releaseYear": 2018, "anneemarvel": 2016 },
-                    { "filmLabel": "Spider-Man: Homecoming", "releaseYear": 2017, "anneemarvel": 2016 },
-                    { "filmLabel": "Thor : Ragnarok", "releaseYear": 2017, "anneemarvel": 2017 },
-                    { "filmLabel": "Ant-Man et la Guêpe", "releaseYear": 2018, "anneemarvel": 2018 },
-                    { "filmLabel": "Avengers: Infinity War", "releaseYear": 2018, "anneemarvel": 2018 },
-                    { "filmLabel": "Avengers: Endgame", "releaseYear": 2019, "anneemarvel": 2023 },
-                    { "filmLabel": "The Marvels", "releaseYear": 2023, "anneemarvel": 2026 },
-                    { "filmLabel": "Shang-Chi et la Légende des Dix Anneaux", "releaseYear": 2021, "anneemarvel": 2024 },
-                    { "filmLabel": "Les Éternels", "releaseYear": 2021, "anneemarvel": 2024 },
-                    { "filmLabel": "Spider-Man: Far from Home", "releaseYear": 2019, "anneemarvel": 2024 },
-                    { "filmLabel": "Spider-Man: No Way Home", "releaseYear": 2021, "anneemarvel": 2024 },
-                    { "filmLabel": "Doctor Strange in the Multiverse of Madness", "releaseYear": 2022, "anneemarvel": 2024 },
-                    { "filmLabel": "Thor: Love and Thunder", "releaseYear": 2022, "anneemarvel": 2025 },
-                    { "filmLabel": "Black Panther: Wakanda Forever", "releaseYear": 2022, "anneemarvel": 2025 },
-                    { "filmLabel": "Ant-Man et la Guêpe : Quantumania", "releaseYear": 2023, "anneemarvel": 2026 },
-                    { "filmLabel": "Les Gardiens de la Galaxie Vol. 3", "releaseYear": 2023, "anneemarvel": 2026 }
-                ];
+        
+                
+            document.addEventListener("DOMContentLoaded", () => {
+               
+                   let filmsData = [];
 
-                filmsData.sort((a, b) => a.anneemarvel - b.anneemarvel);
-
+                fetch('marvelData.json')
+                    .then((response) => response.json())
+                    .then((data) => {
+                        filmsData = data;
+                        dessineHistogramme();
+                    })       
+                    
+                   
                 const svg = document.getElementById("histogrammeChrono");
                 const infobulle = document.getElementById("infobulle");
 
@@ -93,23 +70,7 @@
                 const reelanneemin = 2007;
                 const ratioHauteur = hauteurHistogramme / (reelanneemax - reelanneemin);
 
-                function dessineAxes() {
-                    
-                    const longueurAxeX = filmsData.length * (largeurBarre + espacementBarre) + decaleaxe;
-                    svg.innerHTML += `<path style="stroke:white;" d="M ${decaleaxe} ${hauteurHistogramme} L ${longueurAxeX} ${hauteurHistogramme}" />
-                          <path style="stroke:white;" d="M ${decaleaxe} ${hauteurHistogramme} L ${decaleaxe} 0" />`;
-
-                    filmsData.forEach((film, i) => {
-                        const x = decaleaxe + i * (largeurBarre + espacementBarre) + largeurBarre / 2;
-                        svg.innerHTML += `<text x="${x - 10}" y="${hauteurHistogramme + 15}" font-size="10" style="fill:white;">${film.anneemarvel}</text>`;
-                    });
-
-                    for (let annee = reelanneemin; annee <= reelanneemax; annee += 1) {
-                        const y = hauteurHistogramme - ((annee - reelanneemin) * ratioHauteur);
-                        svg.innerHTML += `<text x="${decaleaxe - 5}" y="${y}" font-size="10" text-anchor="end" style="fill:white;">${annee}</text>`;
-                    }
-                }
-
+        
                 function dessineHistogramme() {
                     dessineAxes();
 
@@ -142,6 +103,23 @@
                             infobulle.style.display = "none";
                         });
                     });
+                    
+                      function dessineAxes() {
+
+                        const longueurAxeX = filmsData.length * (largeurBarre + espacementBarre) + decaleaxe;
+                        svg.innerHTML += `<path style="stroke:white;" d="M ${decaleaxe} ${hauteurHistogramme} L ${longueurAxeX} ${hauteurHistogramme}" />
+                          <path style="stroke:white;" d="M ${decaleaxe} ${hauteurHistogramme} L ${decaleaxe} 0" />`;
+
+                        filmsData.forEach((film, i) => {
+                            const x = decaleaxe + i * (largeurBarre + espacementBarre) + largeurBarre / 2;
+                            svg.innerHTML += `<text x="${x - 10}" y="${hauteurHistogramme + 15}" font-size="10" style="fill:white;">${film.anneemarvel}</text>`;
+                        });
+
+                        for (let annee = reelanneemin; annee <= reelanneemax; annee += 1) {
+                            const y = hauteurHistogramme - ((annee - reelanneemin) * ratioHauteur);
+                            svg.innerHTML += `<text x="${decaleaxe - 5}" y="${y}" font-size="10" text-anchor="end" style="fill:white;">${annee}</text>`;
+                        }
+                    }
                 }
 
                 dessineHistogramme();
