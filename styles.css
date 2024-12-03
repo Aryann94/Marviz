@@ -168,7 +168,7 @@ body {
 }
 
 header {
-    position: absolute;
+    position: fixed;
     bottom: 32px;
     left: 50%;
     transform: translatex(-50%);
