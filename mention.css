@@ -231,3 +231,19 @@ h3 {
     text-decoration: underline;
 }
 
+a svg {
+    width: 36px;
+    height: 36px;
+    transition: 0.2s ease;
+}
+a svg:hover {
+    fill: #ff4545; 
+}
+
+.header_back {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 638px;
+}
