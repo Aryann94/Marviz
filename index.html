@@ -4,45 +4,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histogramme des Films Marvel</title>
+    <title>Ordre de visionnage Marvel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <style>
-        body{
-            background-color: black;
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #111;
+            color: white;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
-    
+            position: relative;
         }
-        .infobulle {
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .timeline-line {
+            stroke: #444;
+            stroke-width: 2;
+        }
+
+        .movie-label {
+            fill: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .movie-label:hover {
+            fill: #e62429;
+        }
+
+        .movie-year {
+            fill: #aaa;
+            font-size: 14px;
+        }
+
+        .movie-point {
+            cursor: pointer;
+            transition: r 0.2s;
+        }
+
+        .movie-number {
+            fill: #888;
+            font-size: 14px;
+        }
+
+        .connection-line {
+            stroke: #444;
+            stroke-width: 1.5;
+        }
+
+        .order-number {
+            fill: #e62429;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .tooltip {
             position: absolute;
-            background-color: #333;
-            color: #fff;
-            padding: 5px;
-            border-radius: 3px;
-            display: none;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 20px;
+            border-radius: 12px;
+            pointer-events: none;
+            font-size: 14px;
+            max-width: 300px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transform-origin: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
         }
-        
 
-        .histogramme rect:nth-child(odd) {
-    fill: red;
- 
-}
+        .tooltip-content {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
 
-.histogramme rect:nth-child(even) {
-    fill: white;
-    
-}
+        .tooltip-image {
+            width: 120px;
+            height: 180px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
 
+        .tooltip-image:hover {
+            transform: scale(1.05);
+        }
+
+        .tooltip-info {
+            flex: 1;
+        }
+
+        .tooltip-title {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .tooltip-details {
+            color: #aaa;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal-trailer-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .modal-trailer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+            filter: contrast(1000%) brightness(1000%) grayscale(100%);
+        }
+
+        .background-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 1px 1px, black 1px, transparent 0);
+            background-size: 3px 3px;
+            mix-blend-mode: multiply;
+        }
+
+        /* Couleurs CMYK pour l'effet halftone */
+        .background-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 50% 50%, cyan 25%, transparent 25%) 0 0,
+                radial-gradient(circle at 50% 50%, magenta 25%, transparent 25%) 2px 2px,
+                radial-gradient(circle at 50% 50%, yellow 25%, transparent 25%) 4px 4px;
+            background-size: 8px 8px;
+            mix-blend-mode: screen;
+            opacity: 0.1;
+            filter: contrast(150%);
+        }
+
+        /* Pour assurer que le contenu reste lisible */
+        .container {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
 <body>
+    <div class="background-image"></div>
+    <div class="container">
+        <div id="timeline"></div>
+        <!-- Ajout de la structure de la modale -->
+        <div class="modal" id="trailerModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"></h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-trailer-container">
+                    <iframe class="modal-trailer" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <svg id="histogrammeChrono" class="histogramme" width="90%" height="400">
-    
-    </svg>
-    <div class="infobulle" id="infobulle"></div>
+    <script>
+        const margin = { top: 50, right: 250, bottom: 50, left: 250 };
+        const width = 1000 - margin.left - margin.right;
+        const height = 2000 - margin.top - margin.bottom;
 
-    <script src="chrono.js">
+        const svg = d3.select("#timeline")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", height + margin.top + margin.bottom)
+            .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+            .append("g")
+            .attr("transform", `translate(${margin.left + width / 2},${margin.top})`);
+
+        d3.json("marvelData.json").then(data => {
+            data.sort((a, b) => parseInt(a.anneemarvel) - parseInt(b.anneemarvel));
+
+            data.forEach((d, i) => {
+                d.viewingOrder = i + 1;
+            });
+
+            const yScale = d3.scaleLinear()
+                .domain([0, data.length - 1])
+                .range([0, height]);
+
+            // Ligne centrale
+            svg.append("line")
+                .attr("class", "timeline-line")
+                .attr("x1", 0)
+                .attr("x2", 0)
+                .attr("y1", -20)
+                .attr("y2", height + 20);
+
+            const tooltip = d3.select("body")
+                .append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            const movies = svg.selectAll(".movie")
+                .data(data)
+                .enter()
+                .append("g")
+                .attr("class", "movie")
+                .attr("transform", (d, i) => `translate(0,${yScale(i)})`);
+
+
+            // Lignes de connexion
+            movies.append("line")
+                .attr("class", "connection-line")
+                .attr("x1", 0)
+                .attr("x2", (d, i) => i % 2 === 0 ? -120 : 120)
+                .attr("y1", 0)
+                .attr("y2", 0);
+
+            // Points
+            movies.append("circle")
+                .attr("class", "movie-point")
+                .attr("r", 6)
+                .attr("fill", "#e62429")
+                .attr("stroke", "white")
+                .attr("stroke-width", 2);
+
+            // Conteneur pour le texte
+            const textGroups = movies.append("g")
+                .attr("class", "text-group")
+                .attr("transform", (d, i) => `translate(${i % 2 === 0 ? -140 : 140}, 0)`);
+
+            // Titres avec numéro intégré
+            textGroups.append("text")
+                .attr("class", "movie-label")
+                .attr("x", 0)
+                .attr("y", 0)
+                .style("text-anchor", (d, i) => i % 2 === 0 ? "end" : "start")
+                .style("fill", "white")
+                .text(d => d.filmLabel);
+
+            // Numéro en petit à côté du titre
+            textGroups.append("text")
+                .attr("class", "movie-number")
+                .attr("x", (d, i) => i % 2 === 0 ? 20 : -20)
+                .attr("y", 0)
+                .style("text-anchor", "middle")
+                .text(d => `#${d.viewingOrder}`);
+
+            // Années
+            textGroups.append("text")
+                .attr("class", "movie-year")
+                .attr("x", 0)
+                .attr("y", 20)
+                .style("text-anchor", (d, i) => i % 2 === 0 ? "end" : "start")
+                .text(d => `Marvel: ${d.anneemarvel} | Sortie: ${d.releaseYear}`);
+
+            function openModal(movie) {
+                const modal = document.getElementById('trailerModal');
+                const title = modal.querySelector('.modal-title');
+                const trailer = modal.querySelector('.modal-trailer');
+
+                title.textContent = movie.filmLabel;
+                trailer.src = movie.urlBandeAnnonce;
+
+                modal.classList.add('active');
+            }
+
+            function closeModal() {
+                const modal = document.getElementById('trailerModal');
+                const trailer = modal.querySelector('.modal-trailer');
+
+                modal.classList.remove('active');
+                // Réinitialiser la source de l'iframe pour arrêter la vidéo
+                setTimeout(() => {
+                    trailer.src = '';
+                }, 300);
+            }
+
+            // Configuration des événements de la modale
+            document.querySelector('.modal-close').addEventListener('click', closeModal);
+            document.getElementById('trailerModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) closeModal();
+            });
+
+            movies.on("mouseover", function (event, d) {
+                // Ajout de l'image de fond
+                const backgroundImage = document.querySelector('.background-image');
+                backgroundImage.style.backgroundImage = `url(${d.urlAffiche})`;
+                backgroundImage.style.opacity = '0.3';
+
+                // Effet d'agrandissement du point
+                d3.select(this).select(".movie-point")
+                    .transition()
+                    .duration(200)
+                    .attr("r", 9);
+
+                // Affichage du tooltip
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+
+                tooltip.html(`
+                    <div class="tooltip-content">
+                        <img class="tooltip-image" src="${d.urlAffiche}" alt="${d.filmLabel}"/>
+                        <div class="tooltip-info">
+                            <h3 class="tooltip-title">${d.filmLabel}</h3>
+                            <p class="tooltip-details">Ordre de visionnage: #${d.viewingOrder}</p>
+                            <p class="tooltip-details">Année Marvel: ${d.anneemarvel}</p>
+                            <p class="tooltip-details">Année de sortie: ${d.releaseYear}</p>
+                        </div>
+                    </div>
+                `)
+                    .style("left", (event.pageX + 20) + "px")
+                    .style("top", (event.pageY - 20) + "px")
+                    .style("transform", "scale(1)");
+            })
+                .on("mouseout", function () {
+                    // Faire disparaître l'image de fond
+                    const backgroundImage = document.querySelector('.background-image');
+                    backgroundImage.style.opacity = '0';
+                    // Retour à la taille normale du point
+                    d3.select(this).select(".movie-point")
+                        .transition()
+                        .duration(200)
+                        .attr("r", 6);
+
+                    // Masquer le tooltip
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0)
+                        .style("transform", "scale(0.95)");
+                })
+                // Ajout de l'événement click pour ouvrir la modale
+                .on("click", function (event, d) {
+                    openModal(d);
+                })
+                // Ajout du curseur pointer sur les éléments cliquables
+                .style("cursor", "pointer");
+        });
     </script>
 </body>
 
