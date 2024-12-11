@@ -1,0 +1,343 @@
+[
+    {
+        "film": "http://www.wikidata.org/entity/Q192724",
+        "filmLabel": "Iron Man",
+        "releaseYear": "2008",
+        "allocineID": "53751",
+        "totalBoxOffice": "585366247",
+        "anneemarvel": "2010",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/medias\/nmedia\/18\/62\/89\/45\/18876909.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/18809687.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q466611",
+        "filmLabel": "L'Incroyable Hulk",
+        "releaseYear": "2008",
+        "allocineID": "114820",
+        "totalBoxOffice": "790282653",
+        "anneemarvel": "2011",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/medias\/nmedia\/18\/65\/69\/21\/18949753.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/18817812.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q205028",
+        "filmLabel": "Iron Man 2",
+        "releaseYear": "2010",
+        "allocineID": "136190",
+        "totalBoxOffice": "623933331",
+        "anneemarvel": "2011",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/medias\/nmedia\/18\/70\/45\/28\/19408942.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/18975236.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q217020",
+        "filmLabel": "Thor",
+        "releaseYear": "2011",
+        "allocineID": "129477",
+        "totalBoxOffice": "2555555559.92",
+        "anneemarvel": "2011",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/medias\/nmedia\/18\/77\/96\/35\/19701393.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19203432.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q275120",
+        "filmLabel": "Captain America: First Avenger",
+        "releaseYear": "2011",
+        "allocineID": "136557",
+        "totalBoxOffice": "3283345674",
+        "anneemarvel": "1945",
+        "urlAffiche": "https:\/\/fr.web.img2.acsta.net\/c_310_420\/medias\/nmedia\/18\/84\/69\/36\/19774937.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19234124.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q182218",
+        "filmLabel": "Avengers",
+        "releaseYear": "2012",
+        "allocineID": "130440",
+        "totalBoxOffice": "8568683592",
+        "anneemarvel": "2012",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/medias\/nmedia\/18\/85\/31\/58\/20042068.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19314006.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q209538",
+        "filmLabel": "Iron Man 3",
+        "releaseYear": "2013",
+        "allocineID": "139589",
+        "totalBoxOffice": "8119126230",
+        "anneemarvel": "2012",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/medias\/nmedia\/18\/91\/08\/37\/20508296.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19484270.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q1201853",
+        "filmLabel": "Thor : Le Monde des ténèbres",
+        "releaseYear": "2013",
+        "allocineID": "193108",
+        "totalBoxOffice": "2553435840",
+        "anneemarvel": "2013",
+        "urlAffiche": "https:\/\/fr.web.img5.acsta.net\/c_310_420\/pictures\/210\/407\/21040735_20130916181657638.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19536919.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q1765358",
+        "filmLabel": "Captain America : Le Soldat de l'hiver",
+        "releaseYear": "2014",
+        "allocineID": "193113",
+        "totalBoxOffice": "5845128450",
+        "anneemarvel": "2014",
+        "urlAffiche": "https:\/\/fr.web.img5.acsta.net\/c_310_420\/pictures\/14\/01\/31\/17\/06\/486036.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19539268.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q5887360",
+        "filmLabel": "Les Gardiens de la Galaxie",
+        "releaseYear": "2014",
+        "allocineID": "196604",
+        "totalBoxOffice": "5532476000",
+        "anneemarvel": "2014",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/pictures\/14\/08\/04\/15\/09\/405662.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19546177.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q5901134",
+        "filmLabel": "Ant-Man",
+        "releaseYear": "2015",
+        "allocineID": "130438",
+        "totalBoxOffice": "808690519.59",
+        "anneemarvel": "2015",
+        "urlAffiche": "https:\/\/fr.web.img2.acsta.net\/c_310_420\/pictures\/15\/05\/06\/16\/05\/305731.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19552728.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q14171368",
+        "filmLabel": "Avengers : L'Ère d'Ultron",
+        "releaseYear": "2015",
+        "allocineID": "198488",
+        "totalBoxOffice": "9369441888.8",
+        "anneemarvel": "2015",
+        "urlAffiche": "https:\/\/fr.web.img2.acsta.net\/c_310_420\/pictures\/15\/02\/24\/18\/29\/161927.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19551828.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q18406872",
+        "filmLabel": "Doctor Strange",
+        "releaseYear": "2016",
+        "allocineID": "130533",
+        "totalBoxOffice": "5399914008",
+        "anneemarvel": "2016",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/16\/09\/09\/08\/57\/518191.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19562026.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q18407657",
+        "filmLabel": "Captain America : Civil War",
+        "releaseYear": "2016",
+        "allocineID": "215143",
+        "totalBoxOffice": "7855212644.65",
+        "anneemarvel": "2016",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/pictures\/16\/03\/11\/09\/46\/182814.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19561381.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q20001199",
+        "filmLabel": "Les Gardiens de la Galaxie Vol. 2",
+        "releaseYear": "2017",
+        "allocineID": "226995",
+        "totalBoxOffice": "1253569152",
+        "anneemarvel": "2014",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/17\/03\/01\/11\/10\/438835.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19568905.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q22665878",
+        "filmLabel": "Thor : Ragnarok",
+        "releaseYear": "2017",
+        "allocineID": "223252",
+        "totalBoxOffice": "9352283320",
+        "anneemarvel": "2017",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/17\/08\/24\/17\/34\/098917.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19573071.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q23010088",
+        "filmLabel": "Spider-Man: Homecoming",
+        "releaseYear": "2017",
+        "allocineID": "209778",
+        "totalBoxOffice": "1214368064",
+        "anneemarvel": "2016",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/17\/05\/30\/13\/13\/145510.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19569522.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q22957393",
+        "filmLabel": "Ant-Man et la Guêpe",
+        "releaseYear": "2018",
+        "allocineID": "226391",
+        "totalBoxOffice": "9232551669",
+        "anneemarvel": "2018",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/pictures\/18\/06\/08\/14\/35\/0842353.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19578201.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q23780734",
+        "filmLabel": "Black Panther",
+        "releaseYear": "2018",
+        "allocineID": "130336",
+        "totalBoxOffice": "6144073617",
+        "anneemarvel": "2016",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/17\/10\/16\/15\/40\/0883250.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19574646.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q23780914",
+        "filmLabel": "Avengers: Infinity War",
+        "releaseYear": "2018",
+        "allocineID": "218265",
+        "totalBoxOffice": "10908700944",
+        "anneemarvel": "2018",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/pictures\/18\/03\/16\/14\/42\/0611719.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19577543.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q27985819",
+        "filmLabel": "Spider-Man: Far from Home",
+        "releaseYear": "2019",
+        "allocineID": "222291",
+        "totalBoxOffice": "10328757780",
+        "anneemarvel": "2024",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/pictures\/19\/06\/13\/15\/28\/4575985.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19583771.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q23781129",
+        "filmLabel": "Captain Marvel",
+        "releaseYear": "2019",
+        "allocineID": "141110",
+        "totalBoxOffice": "4665878433",
+        "anneemarvel": "1995",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/18\/12\/03\/08\/53\/5968896.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19581963.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q23781155",
+        "filmLabel": "Avengers: Endgame",
+        "releaseYear": "2019",
+        "allocineID": "232669",
+        "totalBoxOffice": "16785007968",
+        "anneemarvel": "2023",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/19\/04\/04\/09\/04\/0472053.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19583315.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q65768589",
+        "filmLabel": "Shang-Chi et la Légende des Dix Anneaux",
+        "releaseYear": "2021",
+        "allocineID": "270144",
+        "totalBoxOffice": "2627146336",
+        "anneemarvel": "2024",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/21\/08\/25\/11\/54\/3128925.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19589634.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q68934496",
+        "filmLabel": "Spider-Man: No Way Home",
+        "releaseYear": "2021",
+        "allocineID": "256880",
+        "totalBoxOffice": "2735962181",
+        "anneemarvel": "2024",
+        "urlAffiche": "https:\/\/fr.web.img2.acsta.net\/c_310_420\/pictures\/21\/11\/16\/10\/01\/4860598.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19593624.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q23894629",
+        "filmLabel": "Les Éternels",
+        "releaseYear": "2021",
+        "allocineID": "136316",
+        "totalBoxOffice": "2267740532",
+        "anneemarvel": "2024",
+        "urlAffiche": "https:\/\/fr.web.img5.acsta.net\/c_310_420\/pictures\/21\/10\/13\/10\/33\/5985249.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19593589.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q23894626",
+        "filmLabel": "Black Widow",
+        "releaseYear": "2021",
+        "allocineID": "230783",
+        "totalBoxOffice": "1690209930",
+        "anneemarvel": "2016",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/21\/06\/30\/13\/37\/5245550.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19591798.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q54860489",
+        "filmLabel": "Black Panther: Wakanda Forever",
+        "releaseYear": "2022",
+        "allocineID": "263242",
+        "totalBoxOffice": "3939113688",
+        "anneemarvel": "2025",
+        "urlAffiche": "https:\/\/fr.web.img6.acsta.net\/c_310_420\/pictures\/22\/10\/17\/10\/28\/5232325.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19598505.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q64211112",
+        "filmLabel": "Doctor Strange in the Multiverse of Madness",
+        "releaseYear": "2022",
+        "allocineID": "251390",
+        "totalBoxOffice": "4101322233",
+        "anneemarvel": "2024",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/pictures\/22\/04\/08\/10\/30\/1779137.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19595154.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q65768604",
+        "filmLabel": "Thor: Love and Thunder",
+        "releaseYear": "2022",
+        "allocineID": "275207",
+        "totalBoxOffice": "1245148412",
+        "anneemarvel": "2025",
+        "urlAffiche": "https:\/\/fr.web.img5.acsta.net\/c_310_420\/pictures\/22\/05\/24\/11\/16\/2411535.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19596771.html"
+    },
+    
+    {
+        "film": "http://www.wikidata.org/entity/Q29226331",
+        "filmLabel": "Les Gardiens de la Galaxie Vol. 3",
+        "releaseYear": "2023",
+        "allocineID": "246641",
+        "totalBoxOffice": "4818206368",
+        "anneemarvel": "2026",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/pictures\/23\/02\/13\/11\/43\/2783447.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19599041.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q89474225",
+        "filmLabel": "The Marvels",
+        "releaseYear": "2023",
+        "allocineID": "272433",
+        "totalBoxOffice": "871910340",
+        "anneemarvel": "2026",
+        "urlAffiche": "https:\/\/fr.web.img2.acsta.net\/c_310_420\/pictures\/23\/09\/07\/15\/28\/3776600.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19600653.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q105359456",
+        "filmLabel": "Ant-Man et la Guêpe : Quantumania",
+        "releaseYear": "2023",
+        "allocineID": "261724",
+        "totalBoxOffice": "2089564347",
+        "anneemarvel": "2026",
+        "urlAffiche": "https:\/\/fr.web.img5.acsta.net\/c_310_420\/pictures\/23\/01\/10\/11\/56\/4907182.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19598584.html"
+    },
+    {
+        "film": "http://www.wikidata.org/entity/Q102180106",
+        "filmLabel": "Deadpool & Wolverine",
+        "releaseYear": "2024",
+        "allocineID": "251633",
+        "totalBoxOffice": "3978388779",
+        "anneemarvel": "2024",
+        "urlAffiche": "https:\/\/fr.web.img3.acsta.net\/c_310_420\/img\/e4\/cd\/e4cd101f2e66f4e7818fcf53d05c006a.jpg",
+        "urlBandeAnnonce": "https:\/\/player.allocine.fr\/19605182.html"
+    }
+]

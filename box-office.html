@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Box Office Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #160202;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 20px;
+            border-radius: 12px;
+            pointer-events: none;
+            font-size: 14px;
+            max-width: 300px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transform-origin: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+        }
+
+        .tooltip img {
+            width: 120px;
+            height: 180px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tooltip-info {
+            margin-top: 10px;
+            flex: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal-trailer-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .modal-trailer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .marvel-bo-section {
+            position: relative;
+            width: 100%;
+            background-color: #160202;
+        }
+
+        .marvel-header {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            padding: 30px 0;
+        }
+
+        .marvel-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .marvel-header p {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #visualization {
+            position: relative;
+            z-index: 5;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="marvel-bo-section">
+        <div class="marvel-header">
+            <h1>Box-Office des Films Marvel</h1>
+            <p>Découvrez les performances financières des films les plus emblématiques de l'univers Marvel</p>
+        </div>
+        <div class="marvel-background-image"></div>
+        <canvas id="visualization"></canvas>
+    </section>
+
+    <script>
+        const dpr = window.devicePixelRatio || 1;
+        const canvas = document.getElementById('visualization');
+        const ctx = canvas.getContext('2d');
+
+        // Dimensions logiques souhaitées
+        const logicalWidth = 1470;
+        const logicalHeight = 800;
+
+        ctx.fillStyle = '#160202';
+        ctx.fillRect(0, 0, logicalWidth, logicalHeight);
+
+        // Ajuster la taille du canvas pour le DPR
+        canvas.width = logicalWidth * dpr;
+        canvas.height = logicalHeight * dpr;
+
+        // Définir la taille d'affichage CSS
+        canvas.style.width = `${logicalWidth}px`;
+        canvas.style.height = `${logicalHeight}px`;
+
+        // Mettre à l'échelle le contexte
+        ctx.scale(dpr, dpr);
+
+        // Configuration de base
+        const centerX = logicalWidth / 2;
+        const centerY = logicalHeight / 2;
+        const radius = Math.min(centerX, centerY) * 0.85;
+        const maxArcAngle = Math.PI * 1.5;
+        const strokeWidth = 12;
+
+        const startColor = { r: 176, g: 18, b: 58 }; // #B0123A
+        const endColor = { r: 253, g: 181, b: 168 }; // #FDB5A8
+        const textSize = 16;
+
+        function interpolateColor(color1, color2, factor) {
+            return {
+                r: Math.round(color1.r + (color2.r - color1.r) * factor),
+                g: Math.round(color1.g + (color2.g - color1.g) * factor),
+                b: Math.round(color1.b + (color2.b - color1.b) * factor)
+            };
+        }
+
+        function formatBoxOffice(value) {
+            const euroValue = value * 0.92;
+            return new Intl.NumberFormat('fr-FR', {
+                style: 'currency',
+                currency: 'EUR',
+                maximumFractionDigits: 0
+            }).format(euroValue);
+        }
+
+        function createTooltip() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            document.body.appendChild(tooltip);
+            return tooltip;
+        }
+
+        // Fonction de dessin du canvas initial
+        function drawInitialCanvas(ctx, top10, maxBoxOffice, logicalWidth, logicalHeight) {
+            // Nettoyer complètement le canvas
+            ctx.fillStyle = '#160202';
+            ctx.fillRect(0, 0, logicalWidth, logicalHeight);
+
+            top10.forEach((film, index) => {
+                const arcPercent = Number(film.totalBoxOffice) / maxBoxOffice;
+                const arcLength = arcPercent * maxArcAngle;
+
+                const currentRadius = radius - (index * (strokeWidth + 8));
+
+                // Position du texte 
+                const textAngle = -Math.PI / 2;
+                const textRadius = currentRadius;
+                const textX = centerX + Math.cos(textAngle) * textRadius - 20;
+                const textY = centerY + Math.sin(textAngle) * textRadius + 0.5;
+
+                // Couleur de l'arc
+                const colorFactor = index / 9;
+                const color = interpolateColor(startColor, endColor, colorFactor);
+                const arcColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+
+                // Dessin de l'arc
+                ctx.beginPath();
+                ctx.strokeStyle = arcColor;
+                ctx.lineWidth = strokeWidth;
+                ctx.arc(
+                    centerX,
+                    centerY,
+                    currentRadius,
+                    -Math.PI / 2,
+                    -Math.PI / 2 + arcLength,
+                    false
+                );
+                ctx.stroke();
+
+                // Texte du film
+                ctx.save();
+                ctx.fillStyle = 'white';
+                ctx.font = `bold ${textSize}px Arial`;
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(`${film.filmLabel}`, textX, textY);
+                ctx.restore();
+            });
+        }
+
+        function animateArcs(ctx, top10, maxBoxOffice, logicalWidth, logicalHeight) {
+
+            let startTime = null;
+            const animationDuration = 2000; // Durée totale de l'animation en millisecondes
+            const textAppearanceDuration = 500; // Durée d'apparition du texte
+
+            function draw(currentTime) {
+                // Initialiser le temps de début
+                if (!startTime) startTime = currentTime;
+
+                // Calculer la progression de l'animation
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / animationDuration, 1);
+
+                // Nettoyer complètement le canvas
+                ctx.fillStyle = '#160202';
+                ctx.fillRect(0, 0, logicalWidth, logicalHeight);
+
+                top10.forEach((film, index) => {
+                    const arcPercent = Number(film.totalBoxOffice) / maxBoxOffice;
+                    const fullArcLength = arcPercent * maxArcAngle;
+
+                    // Calculer la longueur d'arc actuelle basée sur la progression
+                    const currentArcLength = fullArcLength * progress;
+
+                    const currentRadius = radius - (index * (strokeWidth + 8));
+
+                    // Position du texte 
+                    const textAngle = -Math.PI / 2;
+                    const textRadius = currentRadius;
+                    const textX = centerX + Math.cos(textAngle) * textRadius - 20;
+                    const textY = centerY + Math.sin(textAngle) * textRadius + 0.5;
+
+                    // Couleur de l'arc
+                    const colorFactor = index / 9;
+                    const color = interpolateColor(startColor, endColor, colorFactor);
+                    const arcColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+
+                    // Dessin de l'arc
+                    ctx.beginPath();
+                    ctx.strokeStyle = arcColor;
+                    ctx.lineWidth = strokeWidth;
+                    ctx.arc(
+                        centerX,
+                        centerY,
+                        currentRadius,
+                        -Math.PI / 2,
+                        -Math.PI / 2 + currentArcLength,
+                        false
+                    );
+                    ctx.stroke();
+
+                    // Texte avec fondu progressif
+                    if (progress > 0.7) { // Commencer l'apparition du texte vers la fin de l'animation
+                        const textProgress = Math.min((progress - 0.7) / 0.3, 1);
+
+                        ctx.save();
+                        // Fondu progressif de l'opacité
+                        ctx.globalAlpha = textProgress;
+                        ctx.fillStyle = 'white';
+                        ctx.font = `bold ${textSize}px Arial`;
+                        ctx.textAlign = 'right';
+                        ctx.textBaseline = 'middle';
+
+                        // Animation de translation légère
+                        const translateOffset = 20 * (1 - textProgress);
+                        ctx.translate(0, translateOffset);
+
+                        ctx.fillText(`${film.filmLabel}`, textX, textY);
+                        ctx.restore();
+                    }
+                });
+
+                if (progress < 1) {
+                    requestAnimationFrame(draw);
+                }
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        fetch('marvelData.json')
+            .then(response => response.json())
+            .then(data => {
+                const top10 = data
+                    .sort((a, b) => Number(b.totalBoxOffice) - Number(a.totalBoxOffice))
+                    .slice(0, 15);
+
+                const maxBoxOffice = Math.max(...top10.map(film => Number(film.totalBoxOffice)));
+
+                animateArcs(ctx, top10, maxBoxOffice, logicalWidth, logicalHeight);
+
+                drawInitialCanvas(ctx, top10, maxBoxOffice, logicalWidth, logicalHeight);
+
+                let lastHoveredIndex = -1;
+
+                canvas.addEventListener('mousemove', (event) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = (event.clientX - rect.left) * dpr;
+                    const y = (event.clientY - rect.top) * dpr;
+
+                    canvas.style.cursor = 'default';
+                    const tooltip = document.querySelector('.tooltip') || createTooltip();
+                    tooltip.style.display = 'none';
+
+                    let hoveredIndex = -1;
+
+                    top10.forEach((film, index) => {
+                        const arcPercent = Number(film.totalBoxOffice) / maxBoxOffice;
+                        const arcLength = arcPercent * maxArcAngle;
+                        const currentRadius = radius - (index * (strokeWidth + 8));
+
+                        const dx = x - (centerX * dpr);
+                        const dy = y - (centerY * dpr);
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        let angle = Math.atan2(dy, dx);
+                        if (angle < 0) angle += 2 * Math.PI;
+                        angle = (angle + Math.PI / 2) % (2 * Math.PI);
+
+                        const detectionWidth = strokeWidth * 1.5;
+
+                        const isNearRadius = Math.abs(distance - (currentRadius * dpr)) < (detectionWidth * dpr);
+                        const isWithinArcAngle = angle >= 0 && angle <= arcLength;
+
+                        if (isNearRadius && isWithinArcAngle) {
+                            canvas.style.cursor = 'pointer';
+                            hoveredIndex = index;
+
+                            tooltip.innerHTML = `
+                        <img src="${film.urlAffiche}" alt="${film.filmLabel}">
+                        <div class="tooltip-info">
+                            <h3>${film.filmLabel}</h3>
+                            <p>Box Office: ${formatBoxOffice(film.totalBoxOffice)}</p>
+                            <p>Année de sortie: ${film.releaseYear}</p>
+                        </div>
+                    `;
+                            tooltip.style.display = 'block';
+                            tooltip.style.left = event.pageX + 20 + 'px';
+                            tooltip.style.top = event.pageY - 20 + 'px';
+                        }
+                    });
+
+                    // Redessiner uniquement si l'arc survolé change
+                    if (hoveredIndex !== lastHoveredIndex) {
+                        // Réutiliser la fonction de dessin initial comme base
+                        drawInitialCanvas(ctx, top10, maxBoxOffice, logicalWidth, logicalHeight);
+
+                        // Ajouter l'effet de hover uniquement sur l'arc survolé
+                        if (hoveredIndex !== -1) {
+                            const film = top10[hoveredIndex];
+                            const arcPercent = Number(film.totalBoxOffice) / maxBoxOffice;
+                            const arcLength = arcPercent * maxArcAngle;
+
+                            const currentRadius = radius - (hoveredIndex * (strokeWidth + 8));
+                            const currentStrokeWidth = strokeWidth * 1.5;
+
+                            const textAngle = -Math.PI / 2;
+                            const textRadius = currentRadius;
+                            const textX = centerX + Math.cos(textAngle) * textRadius - 20;
+                            const textY = centerY + Math.sin(textAngle) * textRadius + 0.5;
+
+                            // Couleur de l'arc
+                            const colorFactor = hoveredIndex / 9;
+                            const color = interpolateColor(startColor, endColor, colorFactor);
+                            const hoverArcColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.7)`;
+
+                            // Dessin de l'arc survolé
+                            ctx.beginPath();
+                            ctx.strokeStyle = hoverArcColor;
+                            ctx.lineWidth = currentStrokeWidth;
+                            ctx.arc(
+                                centerX,
+                                centerY,
+                                currentRadius,
+                                -Math.PI / 2,
+                                -Math.PI / 2 + arcLength,
+                                false
+                            );
+                            ctx.stroke();
+
+                            // Texte du film survolé
+                            ctx.save();
+                            ctx.fillStyle = 'red';
+                            ctx.font = `bold ${textSize}px Arial`;
+                            ctx.textAlign = 'right';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(`${film.filmLabel}`, textX, textY);
+                            ctx.restore();
+                        }
+
+                        lastHoveredIndex = hoveredIndex;
+                    }
+                });
+
+                // Réinitialisation au mouseout
+                canvas.addEventListener('mouseout', () => {
+                    drawInitialCanvas(ctx, top10, maxBoxOffice, logicalWidth, logicalHeight);
+                    lastHoveredIndex = -1;
+                });
+
+                canvas.addEventListener('click', (event) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = (event.clientX - rect.left) * dpr;
+                    const y = (event.clientY - rect.top) * dpr;
+
+                    top10.forEach((film, index) => {
+                        const arcPercent = Number(film.totalBoxOffice) / maxBoxOffice;
+                        const arcLength = arcPercent * maxArcAngle;
+                        const currentRadius = radius - (index * (strokeWidth + 8));
+
+                        const dx = x - (centerX * dpr);
+                        const dy = y - (centerY * dpr);
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        let angle = Math.atan2(dy, dx);
+                        if (angle < 0) angle += 2 * Math.PI;
+                        angle = (angle + Math.PI / 2) % (2 * Math.PI);
+
+                        const detectionWidth = strokeWidth * 1.5;
+
+                        const isNearRadius = Math.abs(distance - (currentRadius * dpr)) < (detectionWidth * dpr);
+                        const isWithinArcAngle = angle >= 0 && angle <= arcLength;
+
+                        if (isNearRadius && isWithinArcAngle) {
+                            openTrailerModal(film);
+                        }
+                    });
+                });
+
+                function openTrailerModal(film) {
+                    // Créer ou récupérer la modal existante
+                    let modal = document.getElementById('trailerModal');
+                    if (!modal) {
+                        modal = document.createElement('div');
+                        modal.id = 'trailerModal';
+                        modal.className = 'modal';
+                        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"></h2>
+                    <button class="modal-close">×</button>
+                </div>
+                <div class="modal-trailer-container">
+                    <iframe class="modal-trailer" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+        `;
+                        document.body.appendChild(modal);
+
+                        // Ajouter les écouteurs d'événements
+                        modal.querySelector('.modal-close').addEventListener('click', closeModal);
+                        modal.addEventListener('click', (e) => {
+                            if (e.target === modal) closeModal();
+                        });
+                    }
+
+                    // Mettre à jour le contenu
+                    const title = modal.querySelector('.modal-title');
+                    const trailer = modal.querySelector('.modal-trailer');
+
+                    title.textContent = film.filmLabel;
+                    trailer.src = film.urlBandeAnnonce;
+
+                    // Afficher la modal
+                    modal.classList.add('active');
+                }
+
+                function closeModal() {
+                    const modal = document.getElementById('trailerModal');
+                    if (modal) {
+                        const trailer = modal.querySelector('.modal-trailer');
+
+                        modal.classList.remove('active');
+
+                        // Réinitialiser la source de l'iframe pour arrêter la vidéo
+                        setTimeout(() => {
+                            trailer.src = '';
+                        }, 300);
+                    }
+                }
+            });
+
+    </script>
+</body>
+
+</html>
