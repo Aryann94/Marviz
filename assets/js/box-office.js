@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const canvas = document.getElementById("visualization");
   const ctx = canvas.getContext("2d");
 
-  const logicalWidth = 1470;
+  const logicalWidth = Math.min(1000, window.innerWidth);
   const logicalHeight = 800;
 
   ctx.fillStyle = "#160202";
