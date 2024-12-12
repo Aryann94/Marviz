@@ -24,28 +24,24 @@ Marviz est une visualisation interactive des films Marvel, mettant en avant la c
 
 ## 📁 Structure du projet
 marviz/
-│
 ├── assets/
 │   ├── fonts/
 │   │   └── Satoshi/
 │   └── images/
-│
 ├── css/
 │   └── style.css
-│
 ├── js/
 │   ├── box-office.js
 │   └── chronologie.js
-│
 ├── data/
 │   └── marvelData.json
-│
 └── index.html
 
 ## 💻 Installation
 
 ```bash
 git clone https://github.com/votre-username/marviz.git
+```
 
 ⚙️ Configuration
 Le fichier marvelData.json contient toutes les données des films Marvel avec :
