@@ -34,20 +34,19 @@ Marviz est une visualisation interactive des films Marvel, mettant en avant la c
 git clone https://github.com/Aryann94/Marviz.git
 ```
 
-⚙️ Configuration
-Le fichier marvelData.json contient toutes les données des films Marvel avec :
+## ⚙️ Configuration
+### Le fichier marvelData.json contient toutes les données des films Marvel avec :
+- Titre du film
+- Année de sortie
+- Box-office
+- Année dans l'univers Marvel
+- URL de l'affiche
+- URL de la bande-annonce
 
-Titre du film
-Année de sortie
-Box-office
-Année dans l'univers Marvel
-URL de l'affiche
-URL de la bande-annonce
+##📝 Licence
+- Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
-📝 Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
-🙏 Remerciements
-Marvel Studios pour l'univers cinématographique
-La communauté D3.js pour les exemples et l'inspiration
-Fontshare pour la police Satoshi
+##🙏 Remerciements
+- Marvel Studios pour l'univers cinématographique
+- La communauté D3.js pour les exemples et l'inspiration
+- Fontshare pour la police Satoshi
