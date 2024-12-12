@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentImageIndex = 0;
   const loadedImages = [];
   let imagesLoaded = 0;
-  let animationComplete = false;
+  let animationFrameId; 
 
   function drawImageWithBlur(img, imageData) {
     if (!imageData.active) return;
@@ -73,23 +73,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (currentImageIndex < images.length - 1) {
         currentImageIndex++;
         images[currentImageIndex].active = true;
-      } else {
-        animationComplete = true;
-        
-        canvas.style.transition = 'opacity 0.5s ease';
-        canvas.style.opacity = '0';
-        
-        setTimeout(() => {
-          canvas.style.display = 'none';
-          canvas.hidden = true;
-        }, 500);
       }
     }
   }
 
   function animate() {
-    if (animationComplete) return;
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#160202";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -101,7 +89,15 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate); 
+  }
+
+  function cleanup() {
+    cancelAnimationFrame(animationFrameId); 
+    images.length = 0; 
+    loadedImages.length = 0; 
+    canvas.remove(); 
+    
   }
 
   images.forEach((imageData, index) => {
@@ -112,6 +108,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (imagesLoaded === CONFIG.TOTAL_IMAGES) {
         images[0].active = true;
         animate();
+
+        
+        setTimeout(() => {
+          cleanup();
+        }, 5500);
       }
     };
     img.src = imageData.src;
