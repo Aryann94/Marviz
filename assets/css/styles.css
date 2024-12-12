@@ -340,7 +340,7 @@ p {
   align-items: center;
   flex-direction: column;
   position: relative;
-  height: auto; 
+  height: fit-content; 
 }
 
 .timeline-section h2 {
