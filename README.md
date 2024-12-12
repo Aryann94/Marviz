@@ -42,10 +42,10 @@ git clone https://github.com/Aryann94/Marviz.git
 - URL de l'affiche
 - URL de la bande-annonce
 
-##📝 Licence
+## 📝 Licence
 - Ce projet est libre de droit.
 
-##🙏 Remerciements
+## 🙏 Remerciements
 - Marvel Studios pour l'univers cinématographique
 - La communauté D3.js pour les exemples et l'inspiration
 - Fontshare pour la police Satoshi
