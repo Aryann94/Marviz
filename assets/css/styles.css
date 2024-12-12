@@ -1,0 +1,742 @@
+@font-face {
+  font-family: 'marvel';
+  src: url('/assets/fonts/MarvelRegular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Satoshi-Light';
+  src: url('/assets/fonts/Satoshi-Light.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-Light.woff') format('woff'),
+      url('/assets/fonts/Satoshi-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-LightItalic';
+  src: url('/assets/fonts/Satoshi-LightItalic.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-LightItalic.woff') format('woff'),
+      url('/assets/fonts/Satoshi-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi-Regular';
+  src: url('/assets/fonts/Satoshi-Regular.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-Regular.woff') format('woff'),
+      url('/assets/fonts/Satoshi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-Italic';
+  src: url('/assets/fonts/Satoshi-Italic.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-Italic.woff') format('woff'),
+      url('/assets/fonts/Satoshi-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src: url('/assets/fonts/Satoshi-Medium.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-Medium.woff') format('woff'),
+      url('/assets/fonts/Satoshi-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-MediumItalic';
+  src: url('/assets/fonts/Satoshi-MediumItalic.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-MediumItalic.woff') format('woff'),
+      url('/assets/fonts/Satoshi-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi-Bold';
+  src: url('/assets/fonts/Satoshi-Bold.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-Bold.woff') format('woff'),
+      url('/assets/fonts/Satoshi-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-BoldItalic';
+  src: url('/assets/fonts/Satoshi-BoldItalic.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-BoldItalic.woff') format('woff'),
+      url('/assets/fonts/Satoshi-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi-Black';
+  src: url('/assets/fonts/Satoshi-Black.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-Black.woff') format('woff'),
+      url('/assets/fonts/Satoshi-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-BlackItalic';
+  src: url('/assets/fonts/Satoshi-BlackItalic.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-BlackItalic.woff') format('woff'),
+      url('/assets/fonts/Satoshi-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi-Variable';
+  src: url('/assets/fonts/Satoshi-Variable.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-Variable.woff') format('woff'),
+      url('/assets/fonts/Satoshi-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-VariableItalic';
+  src: url('/assets/fonts/Satoshi-VariableItalic.woff2') format('woff2'),
+      url('/assets/fonts/Satoshi-VariableItalic.woff') format('woff'),
+      url('/assets/fonts/Satoshi-VariableItalic.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #160202;
+  color: white;
+}
+
+
+
+
+header {
+  position: fixed;
+  bottom: 48px;
+  left: 50%;
+  transform: translatex(-50%);
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 24px;
+  font-family: 'Satoshi-Variable';
+  font-weight: 700;
+  border: white 1px solid;
+  border-radius: 32px;
+  width: fit-content;
+  padding: 16px 48px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+nav a:hover {
+  transform: scale(1.1);
+}
+
+nav a:active {
+  color: #ff6464;
+}
+
+
+
+
+
+
+
+
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(#720003, #1c0302);
+  background-color: #160202;
+}
+
+
+h1, h2, h3 {
+  margin-top: 0;
+  font-family: 'Satoshi-Bold';
+  text-decoration: none;
+  color: white;
+}
+
+p {
+  font-family: 'Satoshi-Regular';
+}
+
+
+
+
+
+.accueil-image-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: fade-in 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 6s;
+}
+
+.accueil-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Overlay rouge */
+.accueil-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #8F0405;
+  opacity: 0.7;
+  z-index: 2;
+}
+
+.accueil-image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center,
+          rgba(0, 0, 0, 0.1) 0%,
+          rgba(0, 0, 0, 0.4) 35%,
+          rgba(0, 0, 0, 0.7) 70%,
+          rgba(0, 0, 0, 1) 100%
+      );
+  z-index: 3;
+}
+
+
+.hero-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#marvelCanvas {
+  background-color: transparent;
+  position: absolute;
+  transform-origin: center;
+  filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(784%) contrast(89%);
+  -webkit-filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(784%) contrast(89%);
+  -moz-filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(784%) contrast(89%);
+  animation: zoom-out 5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      fade-out 5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      filter 5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.marviz-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.hero-content h1 {
+  margin-bottom: -2rem;
+  font-size: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  animation: zoom-out 10s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      fade-in 10s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      z-index 10s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: forwards;
+  z-index: 0;
+  font-family: 'marvel';
+  font-weight: 400;
+}
+
+@keyframes filter {
+  0% {
+      filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(784%) contrast(89%);
+      -webkit-filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(784%) contrast(89%);
+      -moz-filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(784%) contrast(89%);
+  }
+
+  100% {
+      filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(100%) contrast(89%);
+      -webkit-filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(100%) contrast(89%);
+      -moz-filter: grayscale(100%) sepia(100%) brightness(47%) hue-rotate(319deg) saturate(100%) contrast(89%);
+  }
+}
+
+@keyframes zoom-out {
+  0% {
+      transform: scale(3);
+  }
+
+  100% {
+      transform: scale(2);
+  }
+}
+
+@keyframes fade-out {
+  0% {
+      opacity: 1;
+  }
+
+  50% {
+      opacity: 0.5;
+  }
+
+  75% {
+      opacity: 0.5;
+  }
+
+  100% {
+      opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+      opacity: 0;
+  }
+
+  50% {
+      opacity: 1;
+  }
+
+  75% {
+      opacity: 1;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes z-index {
+  0% {
+      z-index: 0;
+  }
+
+  100% {
+      z-index: 2;
+  }
+}
+
+
+
+
+
+.about-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('/assets/about-grid.svg');
+  background-position: center;
+  background-size: cover;
+}
+
+.about-content {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  width: 40%;
+  height: 400px;
+}
+
+.about-content h2 {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.about-content p {
+  color: #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+.timeline-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.timeline-section h2 {
+  font-size: 2.5rem;
+  margin: 8rem 0 0 0;
+  text-transform: uppercase;
+}
+
+.timeline-section p {
+  width: 50%;
+  text-align: center;
+  color: #ddd;
+  margin-bottom: 4rem;
+}
+
+.timeline-line {
+  stroke: #444;
+  stroke-width: 2;
+}
+
+.movie-label {
+  fill: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.movie-label:hover {
+  fill: #e62429;
+}
+
+.movie-year {
+  fill: #aaa;
+  font-size: 14px;
+}
+
+.movie-point {
+  cursor: pointer;
+  transition: r 0.2s;
+}
+
+.movie-number {
+  fill: #888;
+  font-size: 14px;
+}
+
+.connection-line {
+  stroke: #444;
+  stroke-width: 1.5;
+}
+
+.order-number {
+  fill: #e62429;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tooltip {
+  position: absolute;
+  background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+  padding: 20px;
+  border-radius: 12px;
+  pointer-events: none;
+  font-size: 14px;
+  max-width: 300px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform-origin: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.tooltip-image {
+  width: 120px;
+  height: 180px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.tooltip-image:hover {
+  transform: scale(1.05);
+}
+
+.tooltip-content {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.tooltip img {
+  width: 120px;
+  height: 180px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-info {
+  flex: 1;
+}
+
+.tooltip-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tooltip-details {
+  color: #aaa;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.active {
+  display: flex;
+  opacity: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+  padding: 30px;
+  border-radius: 12px;
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  color: white;
+  font-size: 24px;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+.modal-trailer-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.modal-trailer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+.timeline-background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  filter: contrast(1000%) brightness(1000%) grayscale(100%);
+}
+
+.timeline-background-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 1px 1px, black 1px, transparent 0);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+}
+
+.timeline-background-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+      radial-gradient(circle at 50% 50%, cyan 25%, transparent 25%) 0 0,
+      radial-gradient(circle at 50% 50%, magenta 25%, transparent 25%) 2px 2px,
+      radial-gradient(circle at 50% 50%, yellow 25%, transparent 25%) 4px 4px;
+  background-size: 8px 8px;
+  mix-blend-mode: screen;
+  opacity: 0.1;
+  filter: contrast(150%);
+}
+
+.timeline-content {
+  position: relative;
+  z-index: 1;
+}
+
+text {
+  font-family: 'Satoshi-Regular';
+}
+
+
+
+
+
+
+.marvel-bo-section {
+  position: relative;
+  width: 100%;
+  background-color: #160202;
+}
+
+.marvel-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  padding: 30px 0;
+}
+
+.marvel-header h2 {
+  font-size: 2.5rem;
+  margin: 8rem 0 0 0;
+  text-transform: uppercase;
+}
+
+.marvel-header p {
+  text-align: center;
+  color: #ddd;
+}
+
+#visualization {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+
+
+
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80px;
+  background-color: #160202;
+  color: white;
+  padding: 0 64px;
+  font-family: 'Satoshi-Regular';
+}
+
+footer p {
+  margin: 0;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  font-family: 'Satoshi-bold';
+  margin: 0 0 4px 0;;
+}
