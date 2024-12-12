@@ -7,9 +7,8 @@ Marviz est une visualisation interactive des films Marvel, mettant en avant la c
 - **Visualisation chronologique** : Un graphique interactif montrant l'ordre de visionnage recommandé des films Marvel
 - **Box-office** : Une visualisation élégante des performances financières de chaque film sous forme d'arcs
 - **Interactivité** :
- - Survol des arcs pour voir les détails (box-office, année de sortie, affiche)
+ - Survol pour voir les détails (box-office, année de sortie, affiche...)
  - Clic pour regarder la bande-annonce du film
- - Animations fluides lors de l'apparition des graphiques
 
 ## 📊 Audit d'accessibilité
 [Rapport complet de l'audit](https://ara.numerique.gouv.fr/rapports/bk39LYgQKAM_a83ilon9e)
@@ -44,7 +43,7 @@ git clone https://github.com/Aryann94/Marviz.git
 - URL de la bande-annonce
 
 ##📝 Licence
-- Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+- Ce projet est libre de droit.
 
 ##🙏 Remerciements
 - Marvel Studios pour l'univers cinématographique
