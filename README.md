@@ -23,19 +23,10 @@ Marviz est une visualisation interactive des films Marvel, mettant en avant la c
 - Police personnalisée Satoshi pour le design
 
 ## 📁 Structure du projet
-marviz/
-   assets/
-       fonts/
-           Satoshi/
-       images/
-   css/
-       style.css  
-   js/
-       box-office.js
-       chronologie.js 
-   data/
-       marvelData.json
-   index.html
+### Marviz
+- assets : css, fonts, hero-images, js
+- index.html
+- mention.html
 
 ## 💻 Installation
 
@@ -53,25 +44,10 @@ Année dans l'univers Marvel
 URL de l'affiche
 URL de la bande-annonce
 
-🎨 Personnalisation
-
-Modifiez les couleurs dans le CSS
-Ajustez les dimensions des graphiques dans les fichiers JS
-Personnalisez les animations en modifiant les paramètres d'easing
-
-👥 Contribution
-Les contributions sont les bienvenues ! N'hésitez pas à :
-
-Fork le projet
-Créer une branche pour votre fonctionnalité
-Commit vos changements
-Push sur la branche
-Ouvrir une Pull Request
-
 📝 Licence
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-🙏 Remerciements
 
+🙏 Remerciements
 Marvel Studios pour l'univers cinématographique
 La communauté D3.js pour les exemples et l'inspiration
 Fontshare pour la police Satoshi
