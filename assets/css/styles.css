@@ -1,66 +1,26 @@
 @font-face {
   font-family: 'marvel';
-  src: url('/assets/fonts/MarvelRegular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Satoshi-Light';
-  src: url('/assets/fonts/Satoshi-Light.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-Light.woff') format('woff'),
-      url('/assets/fonts/Satoshi-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Satoshi-LightItalic';
-  src: url('/assets/fonts/Satoshi-LightItalic.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-LightItalic.woff') format('woff'),
-      url('/assets/fonts/Satoshi-LightItalic.ttf') format('truetype');
-  font-weight: 300;
-  font-display: swap;
-  font-style: italic;
+  src: url('/Marviz/assets/fonts/MarvelRegular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Satoshi-Regular';
-  src: url('/assets/fonts/Satoshi-Regular.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-Regular.woff') format('woff'),
-      url('/assets/fonts/Satoshi-Regular.ttf') format('truetype');
+  src: url('/Marviz/assets/fonts/Satoshi-Regular.woff2') format('woff2'),
+      url('/Marviz/assets/fonts/Satoshi-Regular.woff') format('woff'),
+      url('/Marviz/assets/fonts/Satoshi-Regular.ttf') format('truetype');
   font-weight: 400;
   font-display: swap;
   font-style: normal;
-}
-
-@font-face {
-  font-family: 'Satoshi-Italic';
-  src: url('/assets/fonts/Satoshi-Italic.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-Italic.woff') format('woff'),
-      url('/assets/fonts/Satoshi-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-display: swap;
-  font-style: italic;
 }
 
 @font-face {
   font-family: 'Satoshi-Medium';
-  src: url('/assets/fonts/Satoshi-Medium.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-Medium.woff') format('woff'),
-      url('/assets/fonts/Satoshi-Medium.ttf') format('truetype');
+  src: url('/Marviz/Marviz/assets/fonts/Satoshi-Medium.woff2') format('woff2'),
+      url('/Marviz/Marviz/assets/fonts/Satoshi-Medium.woff') format('woff'),
+      url('/Marviz/Marviz/assets/fonts/Satoshi-Medium.ttf') format('truetype');
   font-weight: 500;
   font-display: swap;
   font-style: normal;
-}
-
-@font-face {
-  font-family: 'Satoshi-MediumItalic';
-  src: url('/assets/fonts/Satoshi-MediumItalic.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-MediumItalic.woff') format('woff'),
-      url('/assets/fonts/Satoshi-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-display: swap;
-  font-style: italic;
 }
 
 @font-face {
@@ -74,53 +34,13 @@
 }
 
 @font-face {
-  font-family: 'Satoshi-BoldItalic';
-  src: url('/assets/fonts/Satoshi-BoldItalic.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-BoldItalic.woff') format('woff'),
-      url('/assets/fonts/Satoshi-BoldItalic.ttf') format('truetype');
-  font-weight: 700;
-  font-display: swap;
-  font-style: italic;
-}
-
-@font-face {
   font-family: 'Satoshi-Black';
-  src: url('/assets/fonts/Satoshi-Black.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-Black.woff') format('woff'),
-      url('/assets/fonts/Satoshi-Black.ttf') format('truetype');
+  src: url('/Marviz/assets/fonts/Satoshi-Black.woff2') format('woff2'),
+      url('/Marviz/assets/fonts/Satoshi-Black.woff') format('woff'),
+      url('/Marviz/assets/fonts/Satoshi-Black.ttf') format('truetype');
   font-weight: 900;
   font-display: swap;
   font-style: normal;
-}
-
-@font-face {
-  font-family: 'Satoshi-BlackItalic';
-  src: url('/assets/fonts/Satoshi-BlackItalic.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-BlackItalic.woff') format('woff'),
-      url('/assets/fonts/Satoshi-BlackItalic.ttf') format('truetype');
-  font-weight: 900;
-  font-display: swap;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Satoshi-Variable';
-  src: url('/assets/fonts/Satoshi-Variable.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-Variable.woff') format('woff'),
-      url('/assets/fonts/Satoshi-Variable.ttf') format('truetype');
-  font-weight: 300 900;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Satoshi-VariableItalic';
-  src: url('/assets/fonts/Satoshi-VariableItalic.woff2') format('woff2'),
-      url('/assets/fonts/Satoshi-VariableItalic.woff') format('woff'),
-      url('/assets/fonts/Satoshi-VariableItalic.ttf') format('truetype');
-  font-weight: 300 900;
-  font-display: swap;
-  font-style: italic;
 }
 
 
@@ -152,8 +72,7 @@ nav {
   display: flex;
   justify-content: space-evenly;
   gap: 24px;
-  font-family: 'Satoshi-Variable';
-  font-weight: 700;
+  font-family: 'Satoshi-bold';
   border: white 1px solid;
   border-radius: 32px;
   width: fit-content;
@@ -708,8 +627,11 @@ text {
 
 #visualization {
   position: relative;
+  display: block;
+  margin: 0 auto;
   z-index: 1;
 }
+
 
 
 
@@ -726,7 +648,7 @@ footer {
   height: 80px;
   background-color: #160202;
   color: white;
-  padding: 0 64px;
+  padding: 64px 0;
   font-family: 'Satoshi-Regular';
 }
 
@@ -739,4 +661,22 @@ footer a {
   text-decoration: none;
   font-family: 'Satoshi-bold';
   margin: 0 0 4px 0;;
+}
+
+footer a:hover {
+  color: #ff6464;
+}
+
+
+
+
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+#marvelCanvas {
+  transition: opacity 0.5s ease, visibility 0.5s ease, display 0.5s ease;
 }

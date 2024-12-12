@@ -3,25 +3,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const canvas = document.getElementById("visualization");
   const ctx = canvas.getContext("2d");
 
-  // Dimensions logiques souhaitées
   const logicalWidth = 1470;
   const logicalHeight = 800;
 
   ctx.fillStyle = "#160202";
   ctx.fillRect(0, 0, logicalWidth, logicalHeight);
 
-  // Ajuster la taille du canvas pour le DPR
   canvas.width = logicalWidth * dpr;
   canvas.height = logicalHeight * dpr;
 
-  // Définir la taille d'affichage CSS
   canvas.style.width = `${logicalWidth}px`;
   canvas.style.height = `${logicalHeight}px`;
 
-  // Mettre à l'échelle le contexte
   ctx.scale(dpr, dpr);
 
-  // Configuration de base
   const centerX = logicalWidth / 2;
   const centerY = logicalHeight / 2;
   const radius = Math.min(centerX, centerY) * 0.85;
@@ -57,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return tooltip;
   }
 
-  // Fonction de dessin du canvas initial
   function drawInitialCanvas(
     ctx,
     top10,
@@ -65,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
     logicalWidth,
     logicalHeight
   ) {
-    // Nettoyer complètement le canvas
     ctx.fillStyle = "#160202";
     ctx.fillRect(0, 0, logicalWidth, logicalHeight);
 
@@ -75,18 +68,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const currentRadius = radius - index * (strokeWidth + 8);
 
-      // Position du texte
       const textAngle = -Math.PI / 2;
       const textRadius = currentRadius;
       const textX = centerX + Math.cos(textAngle) * textRadius - 20;
       const textY = centerY + Math.sin(textAngle) * textRadius + 0.5;
 
-      // Couleur de l'arc
       const colorFactor = index / 9;
       const color = interpolateColor(startColor, endColor, colorFactor);
       const arcColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
 
-      // Dessin de l'arc
       ctx.beginPath();
       ctx.strokeStyle = arcColor;
       ctx.lineWidth = strokeWidth;
@@ -100,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       ctx.stroke();
 
-      // Texte du film
       ctx.save();
       ctx.fillStyle = "white";
       ctx.font = `bold ${textSize}px Satoshi-Bold`;
@@ -127,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!startTime) startTime = currentTime;
 
         const elapsed = currentTime - startTime;
-        // Appliquer la fonction ease-out à la progression
+
         const linearProgress = Math.min(elapsed / animationDuration, 1);
         const progress = easeOutCubic(linearProgress);
 
@@ -164,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (progress > 0.7) {
             const textProgress = Math.min((progress - 0.7) / 0.3, 1);
-            const easedTextProgress = easeOutCubic(textProgress); // Appliquer ease-out aussi au texte
+            const easedTextProgress = easeOutCubic(textProgress); 
 
             ctx.save();
             ctx.globalAlpha = easedTextProgress;
@@ -189,28 +178,23 @@ document.addEventListener("DOMContentLoaded", function () {
       requestAnimationFrame(draw);
     }
 
-    // Créer l'Intersection Observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Vérifier si l'élément est visible ET n'a pas déjà été animé
           if (entry.isIntersecting && !hasAnimated) {
             performAnimation();
             hasAnimated = true;
-            // Arrêter d'observer une fois l'animation déclenchée
             observer.unobserve(entry.target);
           }
         });
       },
       {
-        // Options de l'observateur
-        root: null, // utilise la viewport
-        rootMargin: "0px", // marge autour de la viewport
-        threshold: 0.1, // déclenche quand au moins 10% de l'élément est visible
+        root: null, 
+        rootMargin: "0px", 
+        threshold: 0.1, 
       }
     );
 
-    // Commencer à observer le canvas
     observer.observe(canvas);
   }
 
@@ -287,9 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
 
-        // Redessiner uniquement si l'arc survolé change
         if (hoveredIndex !== lastHoveredIndex) {
-          // Réutiliser la fonction de dessin initial comme base
           drawInitialCanvas(
             ctx,
             top10,
@@ -298,7 +280,6 @@ document.addEventListener("DOMContentLoaded", function () {
             logicalHeight
           );
 
-          // Ajouter l'effet de hover uniquement sur l'arc survolé
           if (hoveredIndex !== -1) {
             const film = top10[hoveredIndex];
             const arcPercent = Number(film.totalBoxOffice) / maxBoxOffice;
@@ -312,12 +293,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const textX = centerX + Math.cos(textAngle) * textRadius - 20;
             const textY = centerY + Math.sin(textAngle) * textRadius + 0.5;
 
-            // Couleur de l'arc
             const colorFactor = hoveredIndex / 9;
             const color = interpolateColor(startColor, endColor, colorFactor);
             const hoverArcColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.7)`;
 
-            // Dessin de l'arc survolé
             ctx.beginPath();
             ctx.strokeStyle = hoverArcColor;
             ctx.lineWidth = currentStrokeWidth;
@@ -331,7 +310,6 @@ document.addEventListener("DOMContentLoaded", function () {
             );
             ctx.stroke();
 
-            // Texte du film survolé
             ctx.save();
             ctx.fillStyle = "red";
             ctx.font = `bold ${textSize}px Satoshi-Bold`;
@@ -345,7 +323,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // Réinitialisation au mouseout
       canvas.addEventListener("mouseout", () => {
         const tooltip = document.querySelector("#box-office-tooltip");
         if (tooltip) {
@@ -398,7 +375,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       function openTrailerModal(film) {
-        // Créer ou récupérer la modal existante
         let modal = document.getElementById("trailerModal");
         if (!modal) {
           modal = document.createElement("div");
@@ -417,7 +393,6 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
           document.body.appendChild(modal);
 
-          // Ajouter les écouteurs d'événements
           modal
             .querySelector(".modal-close")
             .addEventListener("click", closeModal);
@@ -426,14 +401,12 @@ document.addEventListener("DOMContentLoaded", function () {
           });
         }
 
-        // Mettre à jour le contenu
         const title = modal.querySelector(".modal-title");
         const trailer = modal.querySelector(".modal-trailer");
 
         title.textContent = film.filmLabel;
         trailer.src = film.urlBandeAnnonce;
 
-        // Afficher la modal
         modal.classList.add("active");
       }
 
@@ -444,7 +417,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
           modal.classList.remove("active");
 
-          // Réinitialiser la source de l'iframe pour arrêter la vidéo
           setTimeout(() => {
             trailer.src = "";
           }, 300);

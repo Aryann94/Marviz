@@ -5,13 +5,28 @@ document.addEventListener("DOMContentLoaded", function () {
     duration: 1.2,
   });
 
-  // Fonction pour activer Lenis
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
   }
 
   requestAnimationFrame(raf);
+
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+
+      if (targetElement) {
+        lenis.scrollTo(targetElement, {
+          offset: 0, 
+          duration: 1.2
+        });
+      }
+    });
+  });
 
   gsap.set("header", {
     y: 100,
@@ -32,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const aboutSection = document.querySelector('.about-section');
   const aboutContent = aboutSection.querySelector('.about-content');
 
-  // Créer le paragraphe s'il n'existe pas
   let paragraphElement = aboutSection.querySelector('p.typing-text');
   if (!paragraphElement) {
     paragraphElement = document.createElement('p');
@@ -42,10 +56,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const paragraphText = `Cette visualisation de données vous propose une immersion dans l'univers du MCU (Marvel Cinematic Universe) en mettant en lumière les acteurs et réalisateurs marquants de la franchise. Explorez des statistiques fascinantes à travers des éléments interactifs et animés, et découvrez l'empreinte laissée par chaque talent au fil des années. Ce projet a été réalisé par trois étudiants en deuxième année de Bachelor en Métiers du Multimédia et de l'Internet. Bonne exploration dans l'univers Marvel !`;
 
-  // Pré-remplir le paragraphe avec un espace pour maintenir la mise en page
   paragraphElement.textContent = '';
 
-  // Animation de typing
+  ScrollTrigger.create({
+    trigger: "body",
+    start: "97% bottom",
+    end: "100% bottom",
+    onEnter: () => {
+      gsap.to("header", {
+        opacity: 0,
+        y: 100,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    },
+    onLeaveBack: () => {
+      gsap.to("header", {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    }
+  });
+
   gsap.to(paragraphElement, {
     scrollTrigger: {
       trigger: aboutSection,
@@ -62,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const animationContainer = aboutSection;
 
-  // Écouteur de mouvement
   animationContainer.addEventListener('mousemove', (e) => {
     const rect = animationContainer.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -74,13 +107,12 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.to(aboutContent, {
       x: moveX,
       y: moveY,
-      rotation: moveX * 0.05, // Léger effet de rotation
+      rotation: moveX * 0.05,
       ease: "power1.out",
       duration: 0.5
     });
   });
 
-  // Réinitialisation au mouseout
   animationContainer.addEventListener('mouseout', () => {
     gsap.to(aboutContent, {
       x: 0,

@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentImageIndex = 0;
   const loadedImages = [];
   let imagesLoaded = 0;
+  let animationComplete = false;
 
   function drawImageWithBlur(img, imageData) {
     if (!imageData.active) return;
@@ -72,11 +73,23 @@ document.addEventListener("DOMContentLoaded", function () {
       if (currentImageIndex < images.length - 1) {
         currentImageIndex++;
         images[currentImageIndex].active = true;
+      } else {
+        animationComplete = true;
+        
+        canvas.style.transition = 'opacity 0.5s ease';
+        canvas.style.opacity = '0';
+        
+        setTimeout(() => {
+          canvas.style.display = 'none';
+          canvas.hidden = true;
+        }, 500);
       }
     }
   }
 
   function animate() {
+    if (animationComplete) return;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#160202";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
