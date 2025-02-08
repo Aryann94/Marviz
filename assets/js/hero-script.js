@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const CONFIG = {
     MOTION_BLUR_STRENGTH: 80,
     MOTION_BLUR_QUALITY: 20,
-    ANIMATION_SPEED: 50,
+    ANIMATION_SPEED: 100,
     BLUR_OPACITY: 0.9,
     TOTAL_IMAGES: 28,
     CANVAS_WIDTH: 1920,
@@ -61,36 +61,46 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function updateAnimation(imageData) {
+  function updateAnimation(imageData, index) {
     if (!imageData.active || imageData.done) return;
-
+  
     imageData.y += CONFIG.ANIMATION_SPEED;
-
+  
     if (imageData.y >= imageData.targetY) {
       imageData.y = imageData.targetY;
       imageData.done = true;
-
+  
+      // Activate the next image in the sequence
       if (currentImageIndex < images.length - 1) {
         currentImageIndex++;
         images[currentImageIndex].active = true;
       }
+  
+      // Remove the image after it has been fully placed
+      setTimeout(() => {
+        images.splice(index, 1); // Remove the image data from the array
+        loadedImages.splice(index, 1); // Remove the preloaded image
+        currentImageIndex--; // Adjust the index due to the removed item
+      }, 100); // Delay slightly to ensure it has been drawn
     }
   }
+  
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#160202";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+  
     images.forEach((imageData, index) => {
       if (loadedImages[index]) {
-        updateAnimation(imageData);
+        updateAnimation(imageData, index); // Pass the index
         drawImageWithBlur(loadedImages[index], imageData);
       }
     });
-
-    animationFrameId = requestAnimationFrame(animate); 
+  
+    animationFrameId = requestAnimationFrame(animate);
   }
+  
 
   function cleanup() {
     cancelAnimationFrame(animationFrameId); 
